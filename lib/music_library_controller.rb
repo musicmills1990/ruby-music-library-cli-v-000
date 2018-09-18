@@ -37,7 +37,6 @@ end
 
 def list_songs
 Song.all.sort{|a, b| a.name<=>b.name}.each_with_index{|song, number| puts "#{number += 1}. #{song.artist.name} - #{song.name} - #{song.genre.name}"}
-
 end
 
 def list_artists
@@ -53,24 +52,43 @@ def list_songs_by_artist
   input = ""
   puts "Please enter the name of an artist:"
   input = gets.strip
-
+  number = 1
+  song_list = Song.all.sort{|a, b| a.name<=>b.name}
+  song_list.each do |song|
+    if input == song.artist.name
+    puts "#{number}. #{song.name} - #{song.genre.name}"
+    number += 1
+    end
+  end
 end
 
 def list_songs_by_genre
   input = ""
   puts "Please enter the name of a genre:"
   input = gets.strip
-
+  number = 1
+  song_list = Song.all.sort{|a, b| a.name<=>b.name}
+  song_list.each do |song|
+    if input == song.genre.name
+      puts "#{number}. #{song.artist.name} - #{song.name}"
+      number += 1
+    end
+  end
 end
 
 def play_song
   input = ""
   list_songs
   puts "Which song number would you like to play?"
-  input = gets.strip
+  input = gets.strip.to_i
+  song_list = Song.all.sort{|a, b| a.name<=>b.name}
+    if input <= song_list.length
+      puts "Now playing #{song_list[input].name} by #{song_list[input].artist.name}"
+    end
+  end
 
 
-end
 
 
+  ###
 end
