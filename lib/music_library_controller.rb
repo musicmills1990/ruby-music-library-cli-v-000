@@ -78,8 +78,8 @@ end
 
 def play_song
   input = ""
-  list_songs
   puts "Which song number would you like to play?"
+  list_songs
   input = gets.strip.to_i
   song_list = Song.all.sort{|a, b| a.name<=>b.name}
     if input <= song_list.length
